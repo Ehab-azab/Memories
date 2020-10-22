@@ -1,8 +1,12 @@
 package com.example.memories.base
 
+import android.content.Context
 import android.content.DialogInterface
+import android.content.pm.PackageManager
+import android.text.BoringLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import java.security.Permission
 
 
 // 
@@ -33,5 +37,46 @@ class base : AppCompatActivity() {
 
     fun hidedialog() {
         dialog?.dismiss()
+    }
+
+    fun checkPermition(context: Context, PermitionName: Permission): Boolean {
+        return baseRquest().IsPermitionGRANTED(context, PermitionName)
+    }
+
+    fun takeRequest(
+        context: Context,
+        chekPermitionName: Permission,
+        txtToShowInMessage: String,
+        arrayOfRequests: String,
+        PermitionRequistCode: Int
+    ) {
+        baseRquest().requistPermitionFromUser(
+            context,
+            chekPermitionName,
+            txtToShowInMessage,
+            arrayOfRequests,
+            PermitionRequistCode
+        )
+    }
+
+    fun onreq(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            val number: Int = 0
+            if (requestCode == number) {
+                //ToDo after take request
+            }
+        }
     }
 }

@@ -1,47 +1,52 @@
-package com.example.memories.Requists
+package com.example.memories.base
 
-import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.R
 import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.memories.base.base
-import java.util.jar.Manifest
+import java.lang.reflect.Array
+import java.security.Permission
+import java.security.Permissions
 
 
 // 
-//This for location requist 
+//this for all requests 
 // Created by Ehab Azab on 10/22/2020.
 // Copyright (c) 2020 Memories. All rights reserved.
 //
-class Location_Requist(var context: Context) {
+class baseRquest {
+    fun IsPermitionGRANTED(context: Context, PermitionName: Permission): Boolean {
 
-    fun IsLocationGRANTED(): Boolean {
         return (ContextCompat.checkSelfPermission(
             context,
-            android.Manifest.permission.ACCESS_FINE_LOCATION
+            PermitionName.toString()
         ) == PackageManager.PERMISSION_GRANTED)
     }
 
-    fun requistLocationPermitionFromUser(PermitionRequistCode: Int) {
+    fun requistPermitionFromUser(
+        context: Context,
+        chekPermitionName: Permission,
+        txtToShowInMessage: String,
+        arrayOfRequests: String,
+        PermitionRequistCode: Int
+    ) {
         if (ActivityCompat.shouldShowRequestPermissionRationale(
                 context as Activity,
-                android.Manifest.permission.ACCESS_FINE_LOCATION
+                chekPermitionName.toString()
             )
         ) {
             //thats meen that u shoud explain why u want this permition
             var message = base()
-            message.showDialog(message = "Application Wants to Acces your Location To save the Location Of Memory",
+            message.showDialog(message = txtToShowInMessage,
                 posActionName = "OK", posAction = DialogInterface.OnClickListener { dialog, which ->
                     dialog.dismiss()
                     //add Requist
                     ActivityCompat.requestPermissions(
                         context as Activity,
-                        arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                        PermitionRequistCode
+                        arrayOf(arrayOfRequests), PermitionRequistCode
                     )
                 }, negActionName = "cancel",
                 negAction = DialogInterface.OnClickListener { dialog, which ->
@@ -52,10 +57,8 @@ class Location_Requist(var context: Context) {
             //get requist
             ActivityCompat.requestPermissions(
                 context as Activity,
-                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), PermitionRequistCode
+                arrayOf(arrayOfRequests), PermitionRequistCode
             )
         }
     }
-
-
 }
