@@ -31,6 +31,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
     implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
@@ -41,5 +42,6 @@ dependencies {
     implementation "androidx.viewpager2:viewpager2:1.0.0"
     //googleGPS
     implementation 'com.google.android.gms:play-services-location:17.1.0'
+
 
 }

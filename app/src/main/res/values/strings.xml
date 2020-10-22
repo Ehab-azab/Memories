@@ -5,4 +5,6 @@
     <string name="third_goal">Remember The Greatest Memories \n Any Time</string>
     <string name="nnnnnn">1</string>
     <string name="beautiful_events_should_be_immortalized">Beautiful events should be immortalized</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
