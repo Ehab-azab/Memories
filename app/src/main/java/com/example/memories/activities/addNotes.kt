@@ -14,6 +14,7 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 class addNotes : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_notes)
@@ -37,7 +38,7 @@ class addNotes : AppCompatActivity() {
                 DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
                     //setdate
                     val monthy = mMonth + 1
-                    time.text = "" + mYear + "-" + monthy + "-" + mDay
+                    time.text = "$mYear-$monthy-$mDay"
                     Log.e("time", time.text.toString())
                 },
                 year,
@@ -47,6 +48,14 @@ class addNotes : AppCompatActivity() {
             datepacker.show()
         }
         Log.e("time", time.text.toString())
+        submett.setOnClickListener {
+            val date = time.text.toString()
+            val title = title_of_note.text.toString()
+            val note = note.text.toString()
+            //still
+            val lat = null
+            val long = null
+        }
     }
 
 }

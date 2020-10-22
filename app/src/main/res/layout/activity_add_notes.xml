@@ -58,7 +58,7 @@
             />
 
         <EditText
-            android:id="@+id/title"
+            android:id="@+id/title_of_note"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="10dp"
@@ -88,7 +88,7 @@
             android:maxLines="9"
             android:padding="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title" />
+            app:layout_constraintTop_toBottomOf="@id/title_of_note" />
 
         <FrameLayout
             android:id="@+id/galary_Contener"
@@ -120,6 +120,7 @@
 
 
     <ImageView
+        android:id="@+id/submett"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
