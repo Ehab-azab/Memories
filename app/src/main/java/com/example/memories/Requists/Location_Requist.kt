@@ -18,5 +18,8 @@ import java.util.jar.Manifest
 //
 class Location_Requist(var context: Context) {
 
+    fun IsLocationGRANTED():Boolean{
+        return (ContextCompat.checkSelfPermission(context,android.Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED)
+    }
 
 }
