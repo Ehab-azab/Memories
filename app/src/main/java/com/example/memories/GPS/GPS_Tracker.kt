@@ -22,7 +22,8 @@ class GPS_Tracker() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
-                // Got last known location. In some rare situations this can be null.
+
+            // Got last known location. In some rare situations this can be null.
             }
     }
 
