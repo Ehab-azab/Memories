@@ -55,6 +55,9 @@ class addNotes : AppCompatActivity() {
             //still
             val lat = null
             val long = null
+            Log.e("date", date)
+            Log.e("title", title)
+            Log.e("note", note)
         }
     }
 
