@@ -1,11 +1,12 @@
-package com.example.memories
+package com.example.memories.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.memories.R
 
-class Mains_Activity : AppCompatActivity() {
+class Home : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_mains)
+        setContentView(R.layout.activity_home)
     }
 }

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Memories</string>
+    <string name="first_goal">Happy Moments Always Needs To Be Enrolled</string>
+    <string name="secound_goal">Enroll Your Great Memories \nWith History And Location</string>
+    <string name="third_goal">Remember The Greatest Memories \n Any Time</string>
+    <string name="nnnnnn">1</string>
 </resources>
