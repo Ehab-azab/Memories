@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.TextFragment"
+    android:padding="10dp"
+    >
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/data"
+        tools:text="15/7/2020"
+        android:textSize="25sp"
+        android:layout_margin="10dp"
+        android:textColor="#000"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/data"
+        android:id="@+id/title"
+        tools:text="farah meriam"
+        android:textSize="28sp"
+        android:layout_margin="10dp"
+        android:textColor="#000"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/details"
+        tools:text="Most of the time, you need to get only a few fields of an entity. For example, your UI might display just a user's first name and last name, rather than every detail about the user. By fetching only the columns that appear in your app's UI, you save valuable resources, and your query completes more quickly."
+        android:textSize="28sp"
+        android:textColor="#000"
+        android:layout_margin="15dp"
+        android:gravity="center_horizontal"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

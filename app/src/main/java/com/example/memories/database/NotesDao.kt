@@ -30,4 +30,7 @@ interface NoteDao {
     @Query("select * from Note where title like :word or description like :word")
     fun search(word :String):List<Note>
 
+    @Query("SELECT * FROM Note WHERE lat or long BETWEEN :startPoint AND :endPoint")
+    fun searchArea(startPoint :Float,endPoint :Float)
+
 }
