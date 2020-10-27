@@ -1,15 +1,11 @@
 package com.example.memories.base
 
-import android.R
 import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import java.lang.reflect.Array
-import java.security.Permission
-import java.security.Permissions
 
 
 // 
@@ -18,7 +14,7 @@ import java.security.Permissions
 // Copyright (c) 2020 Memories. All rights reserved.
 //
 class baseRquest {
-    fun IsPermitionGRANTED(context: Context, PermitionName: Permission): Boolean {
+    fun IsPermitionGRANTED(context: Context, PermitionName: String): Boolean {
 
         return (ContextCompat.checkSelfPermission(
             context,
@@ -28,7 +24,7 @@ class baseRquest {
 
     fun requistPermitionFromUser(
         context: Context,
-        chekPermitionName: Permission,
+        chekPermitionName: String,
         txtToShowInMessage: String,
         arrayOfRequests: String,
         PermitionRequistCode: Int

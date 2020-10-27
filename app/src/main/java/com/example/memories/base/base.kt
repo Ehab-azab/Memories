@@ -3,10 +3,8 @@ package com.example.memories.base
 import android.content.Context
 import android.content.DialogInterface
 import android.content.pm.PackageManager
-import android.text.BoringLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import java.security.Permission
 
 
 // 
@@ -14,7 +12,7 @@ import java.security.Permission
 // Created by Ehab Azab on 10/22/2020.
 // Copyright (c) 2020 Memories. All rights reserved.
 //
-class base : AppCompatActivity() {
+open class base : AppCompatActivity() {
     var dialog: AlertDialog? = null
     fun showDialog(
         title: String? = null,
@@ -39,13 +37,13 @@ class base : AppCompatActivity() {
         dialog?.dismiss()
     }
 
-    fun checkPermition(context: Context, PermitionName: Permission): Boolean {
+    fun checkPermition(context: Context, PermitionName: String): Boolean {
         return baseRquest().IsPermitionGRANTED(context, PermitionName)
     }
 
     fun takeRequest(
         context: Context,
-        chekPermitionName: Permission,
+        chekPermitionName: String,
         txtToShowInMessage: String,
         arrayOfRequests: String,
         PermitionRequistCode: Int
