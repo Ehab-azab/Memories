@@ -1,36 +1,35 @@
 package com.example.memories.database
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.Ignore
-import androidx.room.PrimaryKey
+import androidx.room.*
 
 @Entity
 data class Note(
     @PrimaryKey(autoGenerate = true)
-    val id: Int?=null,
+
+    var id: Int? = null,
     @ColumnInfo
-    val title: String? = null,
+    var title: String? = null,
     @ColumnInfo
-    val day: String? = null,
+    var day: String? = null,
     @ColumnInfo
-    val month: String? = null,
+    var month: String? = null,
     @ColumnInfo
-    val year: String? = null,
+    var year: String? = null,
     @ColumnInfo
-    val description : String?=null ,
+    var description: String? = null,
     @ColumnInfo
-    val date : String?=null,
+    var date: String? = null,
     @ColumnInfo
-    val long :Float? = null ,
+    var long: Float? = null,
+    /*@ColumnInfo
+    var pathImage : List<String>?=null,*/
+
     @ColumnInfo
-    val pathImage : List<String>?=null,
+    var lat: Float? = null,
     @ColumnInfo
-    val lat :Float? = null,
+    var startPoint: Float? = null,
     @ColumnInfo
-    val startPoint :Float? = null,
-    @ColumnInfo
-    val endPoint :Float? = null
+    var endPoint: Float? = null
 
 
 

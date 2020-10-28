@@ -20,17 +20,22 @@ interface NoteDao {
 
 
     @Query("select * from Note")
-    fun getAllNotes():List<Note>
+    fun getAllNotes(): List<Note>
 
 
     @Insert
-    fun insertAllNotes(data :List<Note>)
+    fun insertAllNotes(data: List<Note>)
 
 
     @Query("select * from Note where title like :word or description like :word")
-    fun search(word :String):List<Note>
+    fun search(word: String): List<Note>
 
-    @Query("SELECT * FROM Note WHERE lat or long BETWEEN :startPoint AND :endPoint")
-    fun searchArea(startPoint :Float,endPoint :Float)
+    @Query("SELECT * FROM Note WHERE lat BETWEEN :latstartPoint AND :latendPoint and long BETWEEN :longstartPoint AND :longendPoint")
+    fun searchArea(
+        latstartPoint: Float,
+        latendPoint: Float,
+        longstartPoint: Float,
+        longendPoint: Float
+    )
 
 }

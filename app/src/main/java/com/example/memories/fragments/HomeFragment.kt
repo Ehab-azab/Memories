@@ -19,11 +19,11 @@ class HomeFragment : AppCompatActivity() {
 
 
 
-        if(note.pathImage!=null){
+        /*if(note.pathImage!=null){
             changeFragment(imageFragment())
         }else{
             changeFragment(TextFragment())
-        }
+        }*/
 
 
     }
