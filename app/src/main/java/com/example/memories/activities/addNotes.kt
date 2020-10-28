@@ -101,8 +101,6 @@ class addNotes : base() {
             Log.e("title", title!!)
             Log.e("note", notes!!)
             checkforGPSpermition(context = this)
-
-
         }
 
 

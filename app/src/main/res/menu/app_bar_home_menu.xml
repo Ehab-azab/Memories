@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/capture_photo_appBar"
+        android:icon="@drawable/camera_ic"
+        android:title="Camera"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/add_photo_from_galary_appBar"
+        android:icon="@drawable/gallery_ic"
+        android:title="Galary"
+        app:showAsAction="ifRoom" />
+
+</menu>
