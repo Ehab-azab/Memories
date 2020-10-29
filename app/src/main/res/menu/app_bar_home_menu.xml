@@ -4,12 +4,12 @@
     <item
         android:id="@+id/capture_photo_appBar"
         android:icon="@drawable/camera_ic"
-        android:title="Camera"
+        android:title="@string/camera"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/add_photo_from_galary_appBar"
         android:icon="@drawable/gallery_ic"
-        android:title="Galary"
+        android:title="@string/galary"
         app:showAsAction="ifRoom" />
 
 </menu>
