@@ -1,11 +1,17 @@
 package com.example.memories.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.memories.R
+import com.example.memories.activities.location
+import com.example.memories.database.NotesDatabase
+import kotlinx.android.synthetic.main.fragment_image.*
+import kotlinx.android.synthetic.main.fragment_text.*
+import kotlinx.android.synthetic.main.fragment_text.location_ic
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,6 +24,9 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class TextFragment : Fragment() {
+    var bundle = arguments
+    val id = bundle?.getInt("id")
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -36,6 +45,23 @@ class TextFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_text, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val note = NotesDatabase.getInstance(activity!!.baseContext).notesDao().searchbyid(id!!)
+        title.setText(note.title)
+        details.setText(note.description)
+        date.setText(note.date)
+
+        location_ic.setOnClickListener {
+            val intet = Intent(activity, location::class.java)
+            intet.putExtra("lat", note.lat)
+            intet.putExtra("longe", note.longe)
+            startActivity(intet)
+
+        }
+
     }
 
     companion object {

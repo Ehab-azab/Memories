@@ -13,22 +13,25 @@
             android:id="@+id/view_pager5"
             />
 
+
         <me.relex.circleindicator.CircleIndicator3
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:id="@+id/indicator_3"
-            android:background="@color/colorAccent"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/location_ic"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/ic_action_name"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
             />
-
-
-
-
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

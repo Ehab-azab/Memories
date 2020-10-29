@@ -1,16 +1,16 @@
 package com.example.memories.fragments
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.HorizontalScrollView
-import androidx.viewpager2.widget.ViewPager2
+import androidx.fragment.app.Fragment
 import com.example.memories.R
-import kotlinx.android.synthetic.main.activity_mains.*
+import com.example.memories.activities.location
+import com.example.memories.database.Note
+import com.example.memories.database.NotesDatabase
 import kotlinx.android.synthetic.main.fragment_image.*
-import kotlinx.android.synthetic.main.fragment_image.view.*
 import me.relex.circleindicator.CircleIndicator3
 
 // TODO: Rename parameter arguments, choose names that match
@@ -24,10 +24,9 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class imageFragment : Fragment() {
-
-
-
-
+    lateinit var notedata: Note
+    var bundle = arguments
+    val id = bundle?.getInt("id")
 
 
     override fun onCreateView(
@@ -37,21 +36,24 @@ class imageFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_image, container, false)
     }
-    lateinit var text_title : String
-    lateinit var text_Detalis :String
-    lateinit var image_list : MutableList<Int>
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val note = NotesDatabase.getInstance(activity!!.baseContext).notesDao().searchbyid(id!!)
 
 
-
-        view_pager5.adapter = ViewAdapter(text_title,text_Detalis,image_list)
-       // view_pager5.orientation = view_pager5.ORIENTATION_HORIZONTAL
-
+        view_pager5.adapter = ViewAdapter(note)
+        // view_pager5.orientation = view_pager5.ORIENTATION_HORIZONTAL
 
 
+        location_ic.setOnClickListener {
+            val intet = Intent(activity, location::class.java)
+            intet.putExtra("lat", note.lat)
+            intet.putExtra("longe", note.longe)
+            startActivity(intet)
 
+        }
         val indecator = view.findViewById<CircleIndicator3>(R.id.indicator_3)
         indecator.setViewPager(view_pager5)
 

@@ -1,6 +1,7 @@
 package com.example.memories.database
 
 import androidx.room.*
+import com.google.gson.Gson
 
 @Entity
 data class Note(
@@ -19,29 +20,19 @@ data class Note(
     var description: String? = null,
     @ColumnInfo
     var date: String? = null,
+    /*@ColumnInfo(name = "long")
+    var long: Float? = null,*/
+    @TypeConverters(converter::class)
     @ColumnInfo
-    var long: Float? = null,
-    /*@ColumnInfo
-    var pathImage : List<String>?=null,*/
+    var pathImage: MutableList<String>? = null,
 
-    @ColumnInfo
+    @ColumnInfo(name = "lat")
     var lat: Float? = null,
     @ColumnInfo
     var startPoint: Float? = null,
     @ColumnInfo
-    var endPoint: Float? = null
-
-
-
-
-
-
-
-
-
-
-
-
-
+    var endPoint: Float? = null,
+    @ColumnInfo(name = "longe")
+    var longe: Float? = null
 
 )
