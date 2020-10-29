@@ -1,3 +1,4 @@
+
 package com.example.memories.activities
 
 import android.annotation.SuppressLint
@@ -18,11 +19,15 @@ import com.example.memories.GPS.GPS_Tracker
 import com.example.memories.R
 import com.example.memories.Requists.Location_Requist
 import com.example.memories.base.base
+import com.example.memories.database.Note
+import com.example.memories.database.NotesDatabase
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
+import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.tasks.OnCompleteListener
 import kotlinx.android.synthetic.main.activity_add_notes.*
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -31,7 +36,7 @@ import java.util.jar.Manifest
 class addNotes : base() {
     val gps_tracker = GPS_Tracker()
     val base = base()
-    val locatioreq = Location_Requist(this)
+    val imagespathes = mutableListOf<String>()
     val LOCATION_PERMITION_CODE = 3000
     var date: String? = null
     var title: String? = null
@@ -59,6 +64,7 @@ class addNotes : base() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        checkforGPSpermition(context = this)
         setContentView(R.layout.activity_add_notes)
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
@@ -68,12 +74,21 @@ class addNotes : base() {
             startActivity(Intent(this@addNotes, Home::class.java))
             this@addNotes.finish()
         }
-        val currentTime = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            LocalDateTime.now()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val currentTime = LocalDateTime.now()
+            time.setText(currentTime.format(DateTimeFormatter.ISO_DATE).toString())
         } else {
-            TODO("VERSION.SDK_INT < O")
+
+
+            var date = Date()
+            val formatter = SimpleDateFormat("yyyy MMM dd")
+            val datetime: String = formatter.format(date)
+            time.setText(datetime)
         }
-        time.setText(currentTime.format(DateTimeFormatter.ISO_DATE).toString())
+
+
+
         time.setOnClickListener {
             val datepacker = DatePickerDialog(
                 this,
@@ -92,15 +107,32 @@ class addNotes : base() {
         Log.e("time", time.text.toString())
 
         submett.setOnClickListener {
+
             date = time.text.toString()
             title = title_of_note.text.toString()
             notes = note.text.toString()
             //still
-
+            NotesDatabase.getInstance(this).notesDao().addNote(
+                Note(
+                    title = title,
+                    description = notes,
+                    day = day.toString(),
+                    month = month.toString(),
+                    year = year.toString(),
+                    date = date,
+                    lat = lat?.toFloat(),
+                    longe = long?.toFloat(),
+                    pathImage = imagespathes
+                )
+            )
+            startActivity(Intent(this, Home::class.java))
+            finish()
             Log.e("date", date!!)
             Log.e("title", title!!)
             Log.e("note", notes!!)
-            checkforGPSpermition(context = this)
+            Log.e("lat_saved", "" + lat)
+            Log.e("long_saved", "" + long)
+
         }
 
 
