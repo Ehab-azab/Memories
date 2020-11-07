@@ -14,4 +14,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="why_this_Permition">To Add New Memory You Should Give Us Request To Access Location</string>
     <string name="search">Search deeply into the memory</string>
+    <string name="package_name">package</string>
+    <string name="why_we_need_location_permission">The Application wants this permission to save your Location with Memory</string>
+    <string name="why_we_want_galary_permission">We want this permission to save your memory eith images</string>
+    <string name="why_we_want_galary_permission_in_Home_Activity">Application Wants this permission to show you your memories</string>
+    <string name="why_we_want_Camera_permission">Application Wants Camera permission To take Happy Memmories and save it In your Galaries</string>
 </resources>

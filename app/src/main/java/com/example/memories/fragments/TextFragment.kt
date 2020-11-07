@@ -22,8 +22,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class TextFragment : Fragment() {
-    var bundle = arguments
-    val id = bundle?.getInt("id")
+
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -47,6 +46,8 @@ class TextFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        var bundle = arguments
+        val id = bundle?.getInt("id")
         val note = NotesDatabase.getInstance(activity!!.baseContext).notesDao().searchbyid(id!!)
         title.setText(note.title)
         details.setText(note.description)

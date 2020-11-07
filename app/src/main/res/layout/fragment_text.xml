@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
+    android:background="@drawable/application_bg"
     tools:context=".fragments.TextFragment">
 
 
@@ -14,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:textColor="#000"
-        android:textSize="25sp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="15/7/2020" />
@@ -25,7 +26,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:textColor="#000"
-        android:textSize="28sp"
+        android:gravity="start"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/date"
         tools:text="farah meriam" />
@@ -35,9 +38,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="15dp"
-        android:gravity="center_horizontal"
+        android:gravity="start"
+
         android:textColor="#000"
-        android:textSize="28sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

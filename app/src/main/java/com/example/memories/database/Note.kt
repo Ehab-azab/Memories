@@ -7,9 +7,7 @@ import androidx.room.TypeConverters
 
 @Entity
 data class Note(
-    @PrimaryKey(autoGenerate = true)
 
-    var id: Int? = null,
     @ColumnInfo
     var title: String? = null,
     @ColumnInfo
@@ -27,7 +25,6 @@ data class Note(
     @TypeConverters(converter::class)
     @ColumnInfo
     var pathImage: MutableList<String>? = null,
-
     @ColumnInfo(name = "lat")
     var lat: Float? = null,
     @ColumnInfo
@@ -37,4 +34,10 @@ data class Note(
     @ColumnInfo(name = "longe")
     var longe: Float? = null
 
-)
+) {
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    var id: Int = 0
+
+
+}

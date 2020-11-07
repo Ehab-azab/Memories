@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+
     app:cardCornerRadius="15dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,17 +17,19 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:textSize="15sp"
+            android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="15-10-2020" />
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:maxLines="2"
-            android:textSize="22sp"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@id/date_tv"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/date_tv"
@@ -38,7 +41,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:maxLines="11"
-            android:textSize="18sp"
+            android:gravity="start"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title"
             tools:text="description of s fjdh sdfj dkf  dfsh dfsk sfdk sdhfd fk dksfh sdfkds fsdkhf sdfkkfdskfhsdkfhksdfk hkhdsf fjkhkhhkdsfhksdfjh ksdhk kdsfh fk" />
