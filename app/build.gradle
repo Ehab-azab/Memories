@@ -59,4 +59,8 @@ dependencies {
     //gson dependancy
     implementation 'com.google.code.gson:gson:2.8.6'
 
+    //indicator for recyclerview
+    implementation "ru.tinkoff.scrollingpagerindicator:scrollingpagerindicator:1.0.6"
+
+
 }

@@ -3,14 +3,12 @@ package com.example.memories.GPS
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.content.IntentSender
 import android.location.Location
-import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.common.api.ApiException
+import android.os.Looper
+import com.example.memories.LOCATION_CHECK_SETTINGS
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 
 
@@ -20,68 +18,85 @@ import com.google.android.gms.tasks.Task
 // Copyright (c) 2020 Memories. All rights reserved.
 //
 class GPS_Tracker() {
+    lateinit var locationRequest: LocationRequest
+    lateinit var locationCallback: LocationCallback
+    lateinit var fusedLocationClient: FusedLocationProviderClient
 
-
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
-
-
-    @SuppressLint("MissingPermission")
-    fun getLocation(context: Context) {
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
-        fusedLocationClient.lastLocation
-            .addOnSuccessListener { location: Location? ->
-
-                // Got last known location. In some rare situations this can be null.
-            }
+    fun createLocationRequest() {
+        //Create the location request and set the parameters
+        locationRequest = LocationRequest.create().apply {
+            interval = 10000
+            fastestInterval = 5000
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        }
     }
 
-    fun checkgpsoppen(context: Context) {
+    fun checkGPSswtting(context: Context) {
 
-        val REQUEST_CHECK_SETTINGS = 3000
+        //get the current location settings of a user's device.
+        val builder = LocationSettingsRequest.Builder()
+            .addLocationRequest(locationRequest)
 
-        var builder = LocationSettingsRequest.Builder()
-            .addLocationRequest(LocationRequest().setFastestInterval(5000))
-            .addLocationRequest(LocationRequest().setSmallestDisplacement(10.0f))
-        val result =
-            LocationServices.getSettingsClient(context).checkLocationSettings(builder.build())
-        result.addOnCompleteListener(OnCompleteListener {
-            try {
-                val response = it.getResult(ApiException::class.java);
-                // All location settings are satisfied. The client can initialize location
-                // requests here.
-
-                getLocation(context)
+        // check whether the current location settings are satisfied
+        val client: SettingsClient = LocationServices.getSettingsClient(context)
+        val task: Task<LocationSettingsResponse> = client.checkLocationSettings(builder.build())
+        task.addOnSuccessListener {
+            // All location settings are satisfied. The client can initialize
+            // location requests here.
+            // ...
 
 
-            } catch (exception: ApiException) {
-                when (exception.getStatusCode()) {
-                    LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> {
-                        // Location settings are not satisfied. But could be fixed by showing the
-                        // user a dialog.
-                        try {
-                            // Cast to a resolvable exception.
-                            val resolvable = exception as ResolvableApiException
-                            // Show the dialog by calling startResolutionForResult(),
-                            // and check the result in onActivityResult().
+            //TODO if user acept
+            getuserLocation(context)
+        }
 
-                            resolvable.startResolutionForResult(
-                                context as Activity?,
-                                REQUEST_CHECK_SETTINGS
-                            );
-                        } catch (e: IntentSender.SendIntentException) {
-                            // Ignore the error.
-                        } catch (e: ClassCastException) {
-                            // Ignore, should be an impossible error.
-                        }
-                    }
-                    LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {
-                        // Location settings are not satisfied. However, we have no way to fix the
-                        // settings so we won't show the dialog.
-                    }
+        task.addOnFailureListener { exception ->
+            if (exception is ResolvableApiException) {
+                // Location settings are not satisfied, but this can be fixed
+                // by showing the user a dialog.
+                try {
+                    // Show the dialog by calling startResolutionForResult(),
+                    // and check the result in onActivityResult().
+                    exception.startResolutionForResult(
+                        context as Activity,
+                        LOCATION_CHECK_SETTINGS
+                    )
+                } catch (sendEx: IntentSender.SendIntentException) {
+                    // Ignore the error.
                 }
             }
-        })
+        }
+    }
 
+    fun defineLocationUpdateCallback(onLocationUpdateListener: OnLocationUpdateListener) {
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) {
+                locationResult ?: return
+                for (location in locationResult.locations) {
+                    onLocationUpdateListener.onLocationUpdate(location)
+                }
+            }
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    fun getuserLocation(context: Context) {
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
+        fusedLocationClient.requestLocationUpdates(
+            locationRequest,
+            locationCallback,
+            Looper.getMainLooper()
+        )
+    }
+
+    fun stopgettinguserLocation() {
+        if (this::fusedLocationClient.isInitialized)
+            fusedLocationClient.removeLocationUpdates(locationCallback)
+    }
+
+
+    interface OnLocationUpdateListener {
+        fun onLocationUpdate(location: Location)
     }
 
 

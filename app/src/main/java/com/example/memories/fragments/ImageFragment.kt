@@ -2,16 +2,18 @@ package com.example.memories.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.memories.R
 import com.example.memories.activities.location
+import com.example.memories.activities.showPhoto
 import com.example.memories.database.Note
 import com.example.memories.database.NotesDatabase
+import com.example.memories.images.images
 import kotlinx.android.synthetic.main.fragment_image.*
-import me.relex.circleindicator.CircleIndicator3
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,8 +27,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class imageFragment : Fragment() {
     lateinit var notedata: Note
-    var bundle = arguments
-    val id = bundle?.getInt("id")
+
 
 
     override fun onCreateView(
@@ -40,10 +41,31 @@ class imageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        var bundle = arguments
+        val id = bundle?.getInt("id")
+        val imagesclass = images()
+        var listofimages: List<String>? = null
         val note = NotesDatabase.getInstance(activity!!.baseContext).notesDao().searchbyid(id!!)
+        listofimages = note.pathImage as List<String>
+        image_fragment.setImageBitmap(imagesclass.PathToBitmab(note.pathImage?.get(0).toString()))
+        image_fragment.setOnClickListener {
+            val intent = Intent(context, showPhoto::class.java)
+            //intent.putExtra("imagespathes",note.pathImage as ArrayList<String>)
+            intent.putStringArrayListExtra("imagespathes", ArrayList(note.pathImage))
+            Log.e("pa", ArrayList(note.pathImage).toString())
+            startActivity(intent)
+        }
+
+        var arayofstrings = null
 
 
-        view_pager5.adapter = ViewAdapter(note)
+
+        Log.e("photos", listofimages.toString())
+        Log.e("photosarray", "" + arayofstrings)
+        text_title.setText(note.title)
+        text_words.setText(note.description)
+        item_pager_date.setText(note.date)
+
         // view_pager5.orientation = view_pager5.ORIENTATION_HORIZONTAL
 
 
@@ -54,8 +76,6 @@ class imageFragment : Fragment() {
             startActivity(intet)
 
         }
-        val indecator = view.findViewById<CircleIndicator3>(R.id.indicator_3)
-        indecator.setViewPager(view_pager5)
 
 
     }
